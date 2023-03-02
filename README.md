@@ -9,20 +9,18 @@
 
 ### 2_long_data
 
-  * **hrs_long.rds** - Raw HRS data converted from wide to long format
-  * **make_long_data.R** - Script to produce hrs_long.rds
+  * **make_long_data.R** - Script to convert the Raw HRS data from wide to long format, saved as *hrs_long.rds*
 
 ### 3_cleaned_variables
 
-  * **hrs_long_cleaned.rds** - HRS data after cleaning all variables 
-  * **HRS_cleaning_all.R** - Script to produce hrs_long_cleaned.rds
-  * **HRS_variables_list.R** - List of all variables, levels, data types
+  * **HRS_cleaning_all.R** - Script to clean the data, select the variables on interest, and produce *hrs_long_cleaned.rds*
+  * **HRS_variables_list.R** - List of all variables, levels, data types included in the analyses
   
 ### 4_modelling data
 
   * **train.rds** - Training dataset for training all models (60% of full sample)
   * **test.rds** - Test dataset for evaluating all models (40% of full sample)
-  * **make_modelling_data.R** script to produce train.rds and test.rds
+  * **make_modelling_data.R** script to produce the training data *train.rds* and the testing data *test.rds*
   
 ### 5_predictions
 
