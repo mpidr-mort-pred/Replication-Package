@@ -13,7 +13,7 @@ for (j in listofpackages){
 }
 
 # Load brier score data
-data_brier <- read.csv("6_evaluation/minus_backimpd/all/brier.csv") %>% 
+data_brier <- read.csv("6_evaluation/all/brier.csv") %>% 
   select(-X) %>% 
   pivot_longer(!time, names_to = "model", values_to = "value")
   
@@ -41,7 +41,7 @@ data_brier[data_brier$model=="Cox.TV", "model"] <- "Cox-TV"
 data_brier[data_brier$model=="RRF.TV", "model"] <- "RRF-TV"
 
 # Load AUC data
-data_auc <- read.csv("6_evaluation/minus_backimpd/all/auc.csv") %>% 
+data_auc <- read.csv("6_evaluation/all/auc.csv") %>% 
   select(-X) %>% 
   pivot_longer(!time, names_to = "model", values_to = "value")
 
@@ -130,14 +130,6 @@ b = data_auc %>%
         legend.box.margin=margin(0.5,-1,0.5,-1)) +
   guides(color=guide_legend(override.aes = list(shape = override.shape),nrow=2,byrow=TRUE)) 
 
-# theme(legend.title = element_blank(),
-#         legend.spacing.y = unit(-1, "mm"), 
-#         legend.key.size = unit(0.4, 'cm'),
-#         legend.position=c(0.65,0.25),
-#         legend.background = element_blank(),
-#         legend.box.background = element_rect(colour = "black")) +
-#   guides(color=guide_legend(nrow=4,byrow=TRUE))
-
 ggarrange(a, b, 
           ncol=2,
           common.legend = TRUE,
@@ -146,14 +138,13 @@ ggarrange(a, b,
 
 ggsave("8_outputs/figures/plot_evaluation.pdf", width = 8.5, height = 4)
 
-
 # Load brier score data by gender 
-data_brier_men <- read.csv("6_evaluation/minus_backimpd/all/int_brier_gender_men.csv") %>% 
+data_brier_men <- read.csv("6_evaluation/all/int_brier_gender_men.csv") %>% 
   rename(model = X, value = IBS)
 
 data_brier_men$gender <- "Men"
 
-data_brier_women <- read.csv("6_evaluation/minus_backimpd/all/int_brier_gender_women.csv") %>% 
+data_brier_women <- read.csv("6_evaluation/all/int_brier_gender_women.csv") %>% 
   rename(model = X, value = IBS)
 
 data_brier_women$gender <- "Women"
@@ -162,12 +153,12 @@ data_brier_gender <- rbind(data_brier_men, data_brier_women)
 data_brier_gender$index = "Integrated Brier Score"
 
 # Load mean AUC data by gender 
-data_auc_men <- read.csv("6_evaluation/minus_backimpd/all/mean_auc_gender_men.csv") %>% 
+data_auc_men <- read.csv("6_evaluation/all/mean_auc_gender_men.csv") %>% 
   rename(model = X, value = Mean.AUC)
 
 data_auc_men$gender <- "Men"
 
-data_auc_women <- read.csv("6_evaluation/minus_backimpd/all/mean_auc_gender_women.csv") %>% 
+data_auc_women <- read.csv("6_evaluation/all/mean_auc_gender_women.csv") %>% 
   rename(model = X, value = Mean.AUC)
 
 data_auc_women$gender <- "Women"
@@ -265,15 +256,15 @@ plot_gender
 # Race and ethnicity
 
 # Load brier score data by race
-data_brier_white <- read.csv("6_evaluation/minus_backimpd/all/int_brier_race_white.csv") %>% 
+data_brier_white <- read.csv("6_evaluation/all/int_brier_race_white.csv") %>% 
   rename(model = X, value = IBS)
 data_brier_white$race <- "NH Whites"
 
-data_brier_black <- read.csv("6_evaluation/minus_backimpd/all/int_brier_race_black.csv") %>% 
+data_brier_black <- read.csv("6_evaluation/all/int_brier_race_black.csv") %>% 
   rename(model = X, value = IBS)
 data_brier_black$race <- "NH Blacks"
 
-data_brier_hispanic <- read.csv("6_evaluation/minus_backimpd/all/int_brier_race_hispanic.csv") %>% 
+data_brier_hispanic <- read.csv("6_evaluation/all/int_brier_race_hispanic.csv") %>% 
   rename(model = X, value = IBS)
 data_brier_hispanic$race <- "Hispanics"
 
@@ -281,15 +272,15 @@ data_brier_race <- rbind(data_brier_white, data_brier_black, data_brier_hispanic
 data_brier_race$index = "Integrated Brier Score"
 
 # Load AUC data by race
-data_auc_white <- read.csv("6_evaluation/minus_backimpd/all/mean_auc_race_white.csv") %>% 
+data_auc_white <- read.csv("6_evaluation/all/mean_auc_race_white.csv") %>% 
   rename(model = X, value = Mean.AUC)
 data_auc_white$race <- "NH Whites"
 
-data_auc_black <- read.csv("6_evaluation/minus_backimpd/all/mean_auc_race_black.csv") %>% 
+data_auc_black <- read.csv("6_evaluation/all/mean_auc_race_black.csv") %>% 
   rename(model = X, value = Mean.AUC)
 data_auc_black$race <- "NH Blacks"
 
-data_auc_hispanic <- read.csv("6_evaluation/minus_backimpd/all/mean_auc_race_hispanic.csv") %>% 
+data_auc_hispanic <- read.csv("6_evaluation/all/mean_auc_race_hispanic.csv") %>% 
   rename(model = X, value = Mean.AUC)
 data_auc_hispanic$race <- "Hispanics"
 
@@ -373,8 +364,6 @@ b2 <- data_race %>%
         plot.margin=unit(c(-0.3,0.2,0.2,0.2), "cm")) +
   guides(color=guide_legend(override.aes = list(shape = 15, size =4)))
 
-
-
 plot_race <- ggarrange(b1, b2, 
                          ncol=1,
                          common.legend = TRUE,
@@ -382,21 +371,18 @@ plot_race <- ggarrange(b1, b2,
 
 plot_race <- annotate_figure(plot_race, top = text_grob("b. Race and ethnicity", face = "bold", size = 11))
 
-#plot_race 
-
-
 # Education
 
 # Load brier score data by education
-data_brier_high <- read.csv("6_evaluation/minus_backimpd/all/int_brier_educl_high.csv") %>% 
+data_brier_high <- read.csv("6_evaluation/all/int_brier_educl_high.csv") %>% 
   rename(model = X, value = IBS)
 data_brier_high$education <- "High"
 
-data_brier_middle <- read.csv("6_evaluation/minus_backimpd/all/int_brier_educl_medium.csv") %>% 
+data_brier_middle <- read.csv("6_evaluation/all/int_brier_educl_medium.csv") %>% 
   rename(model = X, value = IBS)
 data_brier_middle$education <- "Middle"
 
-data_brier_low <- read.csv("6_evaluation/minus_backimpd/all/int_brier_educl_low.csv") %>% 
+data_brier_low <- read.csv("6_evaluation/all/int_brier_educl_low.csv") %>% 
   rename(model = X, value = IBS)
 data_brier_low$education <- "Low"
 
@@ -404,15 +390,15 @@ data_brier_education <- rbind(data_brier_high, data_brier_middle, data_brier_low
 data_brier_education$index = "Integrated Brier Score"
 
 # Load mean AUC score data by education
-data_auc_high <- read.csv("6_evaluation/minus_backimpd/all/mean_auc_educl_high.csv") %>% 
+data_auc_high <- read.csv("6_evaluation/all/mean_auc_educl_high.csv") %>% 
   rename(model = X, value = Mean.AUC)
 data_auc_high$education <- "High"
 
-data_auc_middle <- read.csv("6_evaluation/minus_backimpd/all/mean_auc_educl_medium.csv") %>% 
+data_auc_middle <- read.csv("6_evaluation/all/mean_auc_educl_medium.csv") %>% 
   rename(model = X, value = Mean.AUC)
 data_auc_middle$education <- "Middle"
 
-data_auc_low <- read.csv("6_evaluation/minus_backimpd/all/mean_auc_educl_low.csv") %>% 
+data_auc_low <- read.csv("6_evaluation/all/mean_auc_educl_low.csv") %>% 
   rename(model = X, value = Mean.AUC)
 data_auc_low$education <- "Low"
 
@@ -512,11 +498,10 @@ ggarrange(plot_gender, plot_race, plot_education,
           widths = c(4.5, 3, 3))
 
 
-ggsave("8_outputs/figures/plot_evaluation_groups.pdf", width = 8.3, height = 7)
+ggsave("8_outputs/plot_evaluation_groups.pdf", width = 8.3, height = 7)
 
 
 #Horizontal plot for presentation
-
 
 # gender
 
@@ -701,7 +686,7 @@ ggarrange(plot_gender, plot_race, plot_education,
           widths = c(8, 6, 6))
 
 
-ggsave("8_outputs/figures/plot_evaluation_groups_horizontal.pdf", width = 12, height = 4)
+ggsave("8_outputs/plot_evaluation_groups_horizontal.pdf", width = 12, height = 4)
 
 # Plot for oversampling, appendix 
 
@@ -717,12 +702,12 @@ col_pal = c("#4E79A7", "#666666", "#F28E2B", "#E15759", "#76B7B2", "#59A14F", "#
 
 
 # Load brier score data by gender 
-data_brier_men <- read.csv("6_evaluation/minus_backimpd/gender/int_brier_gender_men.csv") %>% 
+data_brier_men <- read.csv("6_evaluation/gender/int_brier_gender_men.csv") %>% 
   rename(model = X, value = IBS)
 
 data_brier_men$gender <- "Men"
 
-data_brier_women <- read.csv("6_evaluation/minus_backimpd/gender/int_brier_gender_women.csv") %>% 
+data_brier_women <- read.csv("6_evaluation/gender/int_brier_gender_women.csv") %>% 
   rename(model = X, value = IBS)
 
 data_brier_women$gender <- "Women"
@@ -731,12 +716,12 @@ data_brier_gender <- rbind(data_brier_men, data_brier_women)
 data_brier_gender$index = "Integrated Brier Score"
 
 # Load mean AUC data by gender 
-data_auc_men <- read.csv("6_evaluation/minus_backimpd/gender/mean_auc_gender_men.csv") %>% 
+data_auc_men <- read.csv("6_evaluation/gender/mean_auc_gender_men.csv") %>% 
   rename(model = X, value = Mean.AUC)
 
 data_auc_men$gender <- "Men"
 
-data_auc_women <- read.csv("6_evaluation/minus_backimpd/gender/mean_auc_gender_women.csv") %>% 
+data_auc_women <- read.csv("6_evaluation/gender/mean_auc_gender_women.csv") %>% 
   rename(model = X, value = Mean.AUC)
 
 data_auc_women$gender <- "Women"
@@ -831,15 +816,15 @@ plot_gender
 
 
 # Load brier score data by race
-data_brier_white <- read.csv("6_evaluation/minus_backimpd/race/int_brier_race_white.csv") %>% 
+data_brier_white <- read.csv("6_evaluation/race/int_brier_race_white.csv") %>% 
   rename(model = X, value = IBS)
 data_brier_white$race <- "NH Whites"
 
-data_brier_black <- read.csv("6_evaluation/minus_backimpd/race/int_brier_race_black.csv") %>% 
+data_brier_black <- read.csv("6_evaluation/race/int_brier_race_black.csv") %>% 
   rename(model = X, value = IBS)
 data_brier_black$race <- "NH Blacks"
 
-data_brier_hispanic <- read.csv("6_evaluation/minus_backimpd/race/int_brier_race_hispanic.csv") %>% 
+data_brier_hispanic <- read.csv("6_evaluation/race/int_brier_race_hispanic.csv") %>% 
   rename(model = X, value = IBS)
 data_brier_hispanic$race <- "Hispanics"
 
@@ -847,15 +832,15 @@ data_brier_race <- rbind(data_brier_white, data_brier_black, data_brier_hispanic
 data_brier_race$index = "Integrated Brier Score"
 
 # Load AUC data by race
-data_auc_white <- read.csv("6_evaluation/minus_backimpd/race/mean_auc_race_white.csv") %>% 
+data_auc_white <- read.csv("6_evaluation/race/mean_auc_race_white.csv") %>% 
   rename(model = X, value = Mean.AUC)
 data_auc_white$race <- "NH Whites"
 
-data_auc_black <- read.csv("6_evaluation/minus_backimpd/race/mean_auc_race_black.csv") %>% 
+data_auc_black <- read.csv("6_evaluation/race/mean_auc_race_black.csv") %>% 
   rename(model = X, value = Mean.AUC)
 data_auc_black$race <- "NH Blacks"
 
-data_auc_hispanic <- read.csv("6_evaluation/minus_backimpd/race/mean_auc_race_hispanic.csv") %>% 
+data_auc_hispanic <- read.csv("6_evaluation/race/mean_auc_race_hispanic.csv") %>% 
   rename(model = X, value = Mean.AUC)
 data_auc_hispanic$race <- "Hispanics"
 
@@ -954,15 +939,15 @@ plot_race <- annotate_figure(plot_race, top = text_grob("b. Race and ethnicity (
 # Education
 
 # Load brier score data by education
-data_brier_high <- read.csv("6_evaluation/minus_backimpd/educl/int_brier_educl_high.csv") %>% 
+data_brier_high <- read.csv("6_evaluation/educl/int_brier_educl_high.csv") %>% 
   rename(model = X, value = IBS)
 data_brier_high$education <- "High"
 
-data_brier_middle <- read.csv("6_evaluation/minus_backimpd/educl/int_brier_educl_medium.csv") %>% 
+data_brier_middle <- read.csv("6_evaluation/educl/int_brier_educl_medium.csv") %>% 
   rename(model = X, value = IBS)
 data_brier_middle$education <- "Middle"
 
-data_brier_low <- read.csv("6_evaluation/minus_backimpd/educl/int_brier_educl_low.csv") %>% 
+data_brier_low <- read.csv("6_evaluation/educl/int_brier_educl_low.csv") %>% 
   rename(model = X, value = IBS)
 data_brier_low$education <- "Low"
 
@@ -970,15 +955,15 @@ data_brier_education <- rbind(data_brier_high, data_brier_middle, data_brier_low
 data_brier_education$index = "Integrated Brier Score"
 
 # Load mean AUC score data by education
-data_auc_high <- read.csv("6_evaluation/minus_backimpd/educl/mean_auc_educl_high.csv") %>% 
+data_auc_high <- read.csv("6_evaluation/educl/mean_auc_educl_high.csv") %>% 
   rename(model = X, value = Mean.AUC)
 data_auc_high$education <- "High"
 
-data_auc_middle <- read.csv("6_evaluation/minus_backimpd/educl/mean_auc_educl_medium.csv") %>% 
+data_auc_middle <- read.csv("6_evaluation/educl/mean_auc_educl_medium.csv") %>% 
   rename(model = X, value = Mean.AUC)
 data_auc_middle$education <- "Middle"
 
-data_auc_low <- read.csv("6_evaluation/minus_backimpd/educl/mean_auc_educl_low.csv") %>% 
+data_auc_low <- read.csv("6_evaluation/educl/mean_auc_educl_low.csv") %>% 
   rename(model = X, value = Mean.AUC)
 data_auc_low$education <- "Low"
 
@@ -1077,7 +1062,7 @@ ggarrange(plot_gender, plot_race, plot_education,
           ncol=3,
           widths = c(4.5, 3, 3))
 
-ggsave("8_outputs/figures/plot_evaluation_groups_oversampling.pdf", width = 8.3, height = 6.5)
+ggsave("8_outputs/plot_evaluation_groups_oversampling.pdf", width = 8.3, height = 6.5)
 
 
 # end
