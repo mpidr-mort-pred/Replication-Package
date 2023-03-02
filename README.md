@@ -4,7 +4,7 @@
 
 ## MPIDR Working Paper
 
-**Title**: Predicting individual-level longevity with statistical and machine learning methods
+**Title**: Predicting Individual-level Longevity with Statistical and Machine Learning Methods
 
 **Authors**: Badolato, L., Decter-Frain, A. G., Irons, N., Miranda, M. L., Walk, E., Zhalieva, E., Alexander, M., Basellini, U., Zagheni, E.
 
@@ -17,9 +17,8 @@ Individual-level mortality prediction is a fundamental challenge with implicatio
 
 ### 1_raw_data
 
-  * The raw Health and Retirement Study (HRS) data used in this study are publicly available and can be downloaded [here](https://hrsdata.isr.umich.edu/data-products/gateway-harmonized-hrs#:~:text=These%20harmonized%20data%20sets%20allow,RAND%20HRS%20Longitudinal%20data%20file). 
+  * The raw Health and Retirement Study (HRS) data used in this study are publicly available and can be downloaded [here](https://hrsdata.isr.umich.edu/data-products/gateway-harmonized-hrs#:~:text=These%20harmonized%20data%20sets%20allow,RAND%20HRS%20Longitudinal%20data%20file) 
    
-
 ### 2_long_data
 
   * **make_long_data.R** - Script to convert the Raw HRS data from wide to long format, saved as *hrs_long.rds*
@@ -47,9 +46,9 @@ Individual-level mortality prediction is a fundamental challenge with implicatio
   
 ### 6_evaluation
 
-  * **evaluate_predictions.ipynb** - Script to compute the prediction accuracy metrics. 
-  * **evaluation_visualization.R** - Script to visualize the prediction accuracy metrics. 
-  * **all**, **educl**, **gender**, **race** - Folders that contains the prediction accuracy metrics for the main test dataset, and the oversampled dataset for education level, gender, and race and ethnicity. 
+  * **evaluate_predictions.ipynb** - Script to compute the prediction accuracy metrics 
+  * **evaluation_visualization.R** - Script to visualize the prediction accuracy metrics 
+  * **all**, **educl**, **gender**, **race** - Folders that contains the prediction accuracy metrics for the main test dataset, and the oversampled dataset for education level, gender, and race and ethnicity
   
 ### 7_outputs
 
