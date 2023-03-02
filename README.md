@@ -1,4 +1,4 @@
-# Replication material for "Predicting individual-level longevity with statistical and machine learning methods" 
+# Replication material for "Predicting Individual-level Longevity with Statistical and Machine Learning Methods" 
 
 **Date of the last update**: 2023-03-02
 
