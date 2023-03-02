@@ -47,11 +47,11 @@ cols_long <- cols %>%
             . == 's' , NA) %>% 
   mutate(liv75 = as.numeric(liv75)/100)
 
-#saveRDS(cols_long, "7_expectations/expectations.rds")
+saveRDS(cols_long, "7_expectations/expectations.rds")
 #cols_long <- readRDS('7_expectations/expectations.rds')
 
 # Merge subjective survival probability with test set dataset 
-data <- readRDS('4_modelling_data/minus_backimpd/all_test_imputed_scaled_2.rds') %>% 
+data <- readRDS('4_modelling_data/all_test_imputed_scaled_2.rds') %>% 
   filter(first_wave_outcome == wave_outcome) %>% 
   dplyr::select(c(hhidpn, age, first_wave_outcome, exit_age_outcome, 
                   event_type_outcome, r_gender_cat, r_race_cat, 
@@ -75,80 +75,80 @@ data$r_education <- factor(data$r_educl_cat, levels = c('1','2','3'),
 
 # Survival probabilities
 data <- data %>% 
-  left_join(data.frame(read.csv('5_predictions/minus_backimpd/curves/cph_age.csv')) %>% 
+  left_join(data.frame(read.csv('5_predictions/curves/cph_age.csv')) %>% 
               filter(age %in% c(75)) %>% 
               gather('hhidpn','Cox',-age) %>% 
               mutate(hhidpn = str_replace(hhidpn, 'X', '')) %>% 
               dplyr::select(-age),
             'hhidpn') %>% 
-  left_join(data.frame(read.csv('5_predictions/minus_backimpd/curves/cphreduced_age.csv')) %>% 
+  left_join(data.frame(read.csv('5_predictions/curves/cphreduced_age.csv')) %>% 
               dplyr::select(-X) %>% 
               filter(age %in% c(75)) %>% 
               gather('hhidpn','CoxReduced',-age) %>% 
               mutate(hhidpn = str_replace(hhidpn, 'X', '')) %>% 
               dplyr::select(-age),
             'hhidpn') %>% 
-  left_join(data.frame(read.csv('5_predictions/minus_backimpd/curves/gmp_age.csv')) %>% 
+  left_join(data.frame(read.csv('5_predictions/curves/gmp_age.csv')) %>% 
               dplyr::select(-X) %>% 
               filter(age %in% c(75)) %>% 
               gather('hhidpn','Gompertz',-age) %>% 
               mutate(hhidpn = str_replace(hhidpn, 'X', '')) %>% 
               dplyr::select(-age),
             'hhidpn') %>% 
-  left_join(data.frame(read.csv('5_predictions/minus_backimpd/curves/km_age.csv')) %>% 
+  left_join(data.frame(read.csv('5_predictions/curves/km_age.csv')) %>% 
               dplyr::select(-X) %>% 
               filter(age %in% c(75)) %>% 
               gather('hhidpn','KM',-age) %>% 
               mutate(hhidpn = str_replace(hhidpn, 'X', '')) %>% 
               dplyr::select(-age),
             'hhidpn') %>% 
-  left_join(data.frame(read.csv('5_predictions/minus_backimpd/curves/pchazard_time_age.csv')) %>% 
+  left_join(data.frame(read.csv('5_predictions/curves/pchazard_time_age.csv')) %>% 
               dplyr::select(-X) %>% 
               filter(time %in% c(75)) %>% 
               gather('hhidpn','DeepPCH',-time) %>% 
               mutate(hhidpn = str_replace(hhidpn, 'X', '')) %>% 
               dplyr::select(-time),
             'hhidpn') %>% 
-  left_join(data.frame(read.csv('5_predictions/minus_backimpd/curves/deephit_time_age.csv')) %>% 
+  left_join(data.frame(read.csv('5_predictions/curves/deephit_time_age.csv')) %>% 
               dplyr::select(-X) %>% 
               filter(time %in% c(75)) %>% 
               gather('hhidpn','DeepHit',-time) %>% 
               mutate(hhidpn = str_replace(hhidpn, 'X', '')) %>% 
               dplyr::select(-time),
             'hhidpn') %>% 
-  left_join(data.frame(read.csv('5_predictions/minus_backimpd/curves/deepsurv_time_age.csv')) %>% 
+  left_join(data.frame(read.csv('5_predictions/curves/deepsurv_time_age.csv')) %>% 
               dplyr::select(-X) %>% 
               filter(time %in% c(75)) %>% 
               gather('hhidpn','DeepSurv',-time) %>% 
               mutate(hhidpn = str_replace(hhidpn, 'X', '')) %>% 
               dplyr::select(-time),
             'hhidpn') %>% 
-  left_join(data.frame(read.csv('5_predictions/minus_backimpd/curves/gbd_age.csv')) %>% 
+  left_join(data.frame(read.csv('5_predictions/curves/gbd_age.csv')) %>% 
               filter(age %in% c(75)) %>% 
               gather('hhidpn','GradBoost',-age) %>% 
               mutate(hhidpn = str_replace(hhidpn, 'X', '')) %>% 
               dplyr::select(-age),
             'hhidpn') %>% 
-  left_join(data.frame(read.csv('5_predictions/minus_backimpd/curves/cphnet_age.csv')) %>% 
+  left_join(data.frame(read.csv('5_predictions/curves/cphnet_age.csv')) %>% 
               filter(age %in% c(75)) %>% 
               gather('hhidpn','CoxNet',-age) %>% 
               mutate(hhidpn = str_replace(hhidpn, 'X', '')) %>% 
               dplyr::select(-age),
             'hhidpn') %>% 
-  left_join(data.frame(read.csv('5_predictions/minus_backimpd/curves/rsf_age.csv')) %>% 
+  left_join(data.frame(read.csv('5_predictions/curves/rsf_age.csv')) %>% 
               filter(age %in% c(75)) %>% 
               gather('hhidpn','RSF',-age) %>% 
               mutate(hhidpn = str_replace(hhidpn, 'X', '')) %>% 
               dplyr::select(-age),
             'hhidpn') %>% 
-  left_join(data.frame(read.csv('5_predictions/minus_backimpd/curves/cph_tv_age.csv')) %>% 
+  left_join(data.frame(read.csv('5_predictions/curves/cph_tv_age.csv')) %>% 
               dplyr::select(-X) %>% 
               filter(age %in% c(75)) %>% 
               gather('hhidpn','Cox-TV',-age) %>% 
               mutate(hhidpn = str_replace(hhidpn, 'X', '')) %>% 
               dplyr::select(-age),
             'hhidpn') %>% 
-  left_join(data.frame(read.csv('5_predictions/minus_backimpd/curves/rrf_age.csv')) %>% 
+  left_join(data.frame(read.csv('5_predictions/curves/rrf_age.csv')) %>% 
               dplyr::select(-X) %>% 
               filter(age %in% c(75)) %>% 
               gather('hhidpn','RRF-TV',-age) %>% 
@@ -368,7 +368,7 @@ plot1 <- ggarrange(a, b, c, ncol=3,
 
 plot1
 
-ggsave("8_outputs/figures/plot_subjective_mse.pdf", width = 8, height = 4.4)
+ggsave("8_outputs/plot_subjective_mse.pdf", width = 8, height = 4.4)
 
 # Mean error
 
@@ -477,7 +477,7 @@ plot2 <- ggarrange(d, e, f, ncol=3,
 
 plot2
 
-ggsave("8_outputs/figures/plot_subjective_me.pdf", width = 9, height = 3.5)
+ggsave("8_outputs/plot_subjective_me.pdf", width = 9, height = 3.5)
 
 # graph calibration 
 
@@ -837,7 +837,7 @@ ggarrange(plot_gender,
           ncol=1,
           heights = c(2.96, 3, 3.9))
 
-ggsave("8_outputs/figures/plot_calibration.pdf", width = 7.5, height = 8.1)
+ggsave("8_outputs/plot_calibration.pdf", width = 7.5, height = 8.1)
 
 
 end 
