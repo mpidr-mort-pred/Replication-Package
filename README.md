@@ -23,34 +23,35 @@ Individual-level mortality prediction is a fundamental challenge with implicatio
 ### 2_long_data
 
   * **make_long_data.R** - Script to convert the Raw HRS data from wide to long format, saved as *hrs_long.rds*
-
-### 3_cleaned_variables
-
   * **HRS_cleaning_all.R** - Script to clean the data, select the variables on interest, and produce *hrs_long_cleaned.rds*
   * **HRS_variables_list.R** - List of all variables, levels, data types included in the analyses
   
+### 3_cleaned_variables
+
+ * **hrs_long_cleaned.rds** - Output of *HRS_cleaning_all.R*
+ 
 ### 4_modelling data
 
-  * **train.rds** - Training dataset for training all models (60% of full sample)
-  * **test.rds** - Test dataset for evaluating all models (40% of full sample)
-  * **make_modelling_data.R** script to produce the training data *train.rds* and the testing data *test.rds*
+  * **make_modelling_data.R** - Script to produce the training data *train.rds* and the testing data *test.rds*
+  * **train.rds** - Training dataset for training all models (60% of full sample). Output of *make_modelling_data.R*
+  * **test.rds** - Test dataset for evaluating all models (40% of full sample). Output of *make_modelling_data.R*
   
 ### 5_predictions
 
-  * **base_static_models/**
-    * [ari to fill in files and scripts here]
+  * **models.ipynb** - 
+  * **models.R** - 
     
-  * **advanced_static_models/**
-    * [elnura to fill in files and scripts here]
-    
-  * **time_varying_models/**
-    * [Nick to fill in files and scripts here]
-    
-### 6_expectations
-
-  * [Everyone to fill in scripts that produce results for the subjective predictability]
+  * **curves** - Folder that contains the predicted survival curves  
+  * **model_objects** - Folder that contains the predicted model objects
+  * **oversampled** - Folder that contains the predicted survival curves and model objects for the oversampled data
   
-  ### 7_outputs
+### 6_evaluation
 
-  * [Everyone to fill in scripts that produce figures/tables based on predictions]
+  * **evaluate_predictions.ipynb** - Script to compute the prediction accuracy metrics. 
+  * **evaluation_visualization.R** - Script to visualize the prediction accuracy metrics. 
+  * **all**, **educl**, **gender**, **race** - Folders that contains the prediction accuracy metrics for the main test dataset, and the oversampled dataset for education level, gender, and race and ethnicity. 
+  
+### 7_outputs
+
+  * Figures included in the paper
     
