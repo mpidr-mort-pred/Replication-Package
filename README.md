@@ -48,6 +48,7 @@ Individual-level mortality prediction is a fundamental challenge with implicatio
 
   * **evaluate_predictions.ipynb** - Script to compute the prediction accuracy metrics 
   * **evaluation_visualization.R** - Script to visualize the prediction accuracy metrics 
+  * **variable_importance.py** - Script to calculate variable importance for the nonparametric models
   * **all**, **educl**, **gender**, **race** - Folders that contains the prediction accuracy metrics for the main test dataset, and the oversampled dataset for education level, gender, and race and ethnicity
   
 ### 7_outputs
