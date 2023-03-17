@@ -9,16 +9,16 @@ from sklearn.inspection import permutation_importance
 from sksurv.metrics import integrated_brier_score
 
 #load model for analysis, from nonparametric non-time varying models
-with open("U:/cphnet_model.pkl", "rb") as input_file:
+with open("5_predictions/model_objects/cphnet_model.pkl", "rb") as input_file:
  model = pkl.load(input_file)
-
 
 #print(model)
 #print('end model')
+save_path = 'path_to_save_to'
 
 #load train and test datasets
-train = pyreadr.read_r("U:/all_train_imputed_scaled_2.rds")[None]
-test = pyreadr.read_r("U:/all_test_imputed_scaled_2.rds")[None]
+train = pyreadr.read_r("4_modelling data/train.rds")[None]
+test = pyreadr.read_r("4_modelling data/test.rds")[None]
 
 train = train.reset_index()
 test = test.reset_index()
@@ -93,8 +93,8 @@ plt.rcParams["figure.figsize"] = (10,15)
 plt.barh(X_train.columns[sorted_idx][-10:], perm_importance.importances_mean[sorted_idx][-10:])
 plt.xlabel("Permutation Importance")
 plt.show()
-plt.savefig('U:/feat_impt/cphnet_outs.png')
+plt.savefig(f'{save_path}/cphnet_outs.png')
 
 #save outputs
-with open('U:/feat_impt/cphnet_outs_negibs_df.pickle', 'wb') as file:
+with open(f'{save_path}/cphnet_outs_negibs_df.pickle', 'wb') as file:
     pkl.dump(outs, file)
