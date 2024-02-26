@@ -1,5 +1,6 @@
 # Replication material for "The Limits of Predicting Individual-Level Longevity" 
 
+<!---
 **Date of the last update**: 2023-05-16
 
 ## MPIDR Working Paper
@@ -12,6 +13,7 @@
 
 **Abstract**:
 Individual-level mortality prediction is a fundamental challenge with implications for people and societies. Accurate longevity predictions improve life planning, targeting of high-risk individuals, and organization of social interventions, policies, and public spending. Demographers and actuaries have been primarily concerned with mortality modeling and prediction at a macro level, leveraging strong regularities in mortality rates over age, sex, space, and time. Besides clinical settings, individual-level mortality predictions have been largely overlooked and have remained a challenging task. We model and predict individual-level lifespan using data from the US Health and Retirement Study, a nationally representative longitudinal survey of people over 50 years of age. We estimate 12 statistical and machine learning survival analysis models using over 150 predictors measuring behavioral, biological, demographic, health, and social indicators. Extending previous research on inequalities in mortality and morbidity, we investigate inequalities in individual mortality prediction by gender, race and ethnicity, and education. Machine learning and traditional models report comparable accuracy and relatively high discriminative performance, particularly when including time-varying information (best mean Area Under the Curve = 0.87). However, the models and predictors used fail to account for a majority of lifespan heterogeneity at the individual level. We observe consistent inequalities in mortality predictability and risk discrimination, with lower prediction accuracy for men, non-Hispanic Blacks, and low-educated individuals. In addition, people in these groups show lower accuracy in their subjective predictions of their own lifespan. Finally, we see minimal variation in the top features across groups, with variables related to habits, health history, and finances being relevant predictors. Our results assess how well mortality can be predicted from representative surveys, providing baselines and guidance for future research across countries.
+--->
 
 ## Folder structure
 
@@ -50,8 +52,12 @@ Individual-level mortality prediction is a fundamental challenge with implicatio
   * **evaluation_visualization.R** - Script to visualize the prediction accuracy metrics 
   * **variable_importance.py** - Script to calculate variable importance for the nonparametric models
   * **all**, **educl**, **gender**, **race** - Folders that contains the prediction accuracy metrics for the main test dataset, and the oversampled dataset for education level, gender, and race and ethnicity
+ 
+ ### 7_Expectations
+
+  * **expec_final.R** - Script to compute subjective survival probability 
   
-### 7_outputs
+### 8_outputs
 
   * Figures included in the paper
     
